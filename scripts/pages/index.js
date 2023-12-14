@@ -1,58 +1,29 @@
-async function getPhotographers() {
-  //   // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet,
-  //   // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-  //   let photographers = [
-  //     {
-  //       name: "Ma data test",
-  //       id: 1,
-  //       city: "Paris",
-  //       country: "France",
-  //       tagline: "Ceci est ma data test",
-  //       price: 400,
-  //       portrait: "account.png",
-  //     },
-  //     {
-  //       name: "Autre data test",
-  //       id: 2,
-  //       city: "Londres",
-  //       country: "UK",
-  //       tagline: "Ceci est ma data test 2",
-  //       price: 500,
-  //       portrait: "account.png",
-  //     },
-  //   ];
-  //   // et bien retourner le tableau photographers seulement une fois récupéré
-  //   return {
-  //     photographers: [...photographers, ...photographers, ...photographers],
-  //   };
+//? Classe qui gère la page d'accueil des photographes
+class Home {
+  constructor() {
+    //? Récupère la section où les cartes des photographes seront affichées
+    this.photographer_home = document.querySelector(".photographer_section");
+    //? Instancie une API de données avec le chemin du fichier JSON contenant les données des photographes
+    // eslint-disable-next-line no-undef
+    this.dataApi = new DataApi("./data/photographers.json");
+  }
 
-  try {
-    const response = await fetch("data/photographers.json");
-    if (!response.ok) {
-      throw new Error("Impossible de récupérer les données des photojgraphes");
-    }
-    const data = await response.json();
-    return data.photographers;
-  } catch (error) {
-    console.error(error);
-    return [];
+  //? Fonction principale qui affiche toutes les cartes de photographes sur la page d'accueil
+  async main() {
+    //? Récupère toutes les données de tous les photographes depuis l'API de données
+    const photographersDataAll = await this.dataApi.getDataAll();
+
+    //? Parcourt toutes les données de chaque photographe et crée une carte pour chacun
+    photographersDataAll.forEach((dataHome) => {
+      //? Crée une carte de photographe en utilisant la classe HomeCard et les données de chaque photographe
+      // eslint-disable-next-line no-undef
+      const TemplateHome = new HomeCard(dataHome);
+      //? Ajoute la carte créée à la section d'accueil des photographes
+      this.photographer_home.append(TemplateHome.createHomeCard());
+    });
   }
 }
 
-async function displayData(photographers) {
-  const photographersSection = document.querySelector(".photographer_section");
-
-  photographers.forEach((photographer) => {
-    const photographerModel = photographerTemplate(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
-  });
-}
-
-async function init() {
-  // Récupère les datas des photographes
-  const photographers = await getPhotographers();
-  displayData(photographers);
-}
-
-init();
+//? Instancie la classe Home et appelle la fonction principale pour afficher toutes les cartes de photographes sur la page d'accueil
+const home = new Home();
+home.main();

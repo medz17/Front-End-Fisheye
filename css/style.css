@@ -1,8 +1,26 @@
-@import url("photographer.css");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+
+*::before::after {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
 
 body {
   font-family: "DM Sans", sans-serif;
-  margin: 0;
+}
+
+:root {
+  --text-color-primary: #d3573c;
+  --text-color-secondary: #911c1c;
+  --text-color-tertiary: #000000;
+  --text-color-quaternary: #525252;
+  --text-color-btn: #ffffff;
+  --text-background-color: #fafafa;
+  --bg-color-likes: #db8876;
+  --bg-color-heart-liked: #ff0000;
+  --bg-colors-modale: rgba(0, 0, 0, 0.5);
+  --bg-colorrs-close: rgba(0, 0, 0, 0);
 }
 
 header {
@@ -10,65 +28,168 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 990px) {
+  header {
+    flex-direction: column;
+  }
 }
 
 h1 {
+  color: var(--text-color-secondary);
   font-weight: 400;
-  font-size: 36px;
-  color: #901c1c;
   margin-right: 100px;
+  font-size: 36px;
+}
+
+@media screen and (max-width: 990px) {
+  h1 {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  h1 {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  h1 {
+    font-size: 25px;
+  }
 }
 
 .logo {
-  height: 50px;
+  height: 55px;
   margin-left: 100px;
 }
 
-.photographer_section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
-  margin-top: 100px;
+@media screen and (max-width: 990px) {
+  .logo {
+    margin-left: 0px;
+  }
 }
 
-.photographer_section article {
+@media screen and (max-width: 325px) {
+  .logo {
+    height: 35px;
+  }
+}
+
+.photographer_section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
+  margin-bottom: 7em;
+  gap: 30px;
+}
+
+@media screen and (max-width: 990px) {
+  .photographer_section {
+    gap: 60px;
+  }
+}
+
+.photographer_section .card_profile {
   justify-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: calc(33.33% - (2 * 35px) / 3);
+  margin-bottom: 30px;
 }
 
-.photographer_section article a {
+@media screen and (max-width: 1180px) {
+  .photographer_section .card_profile {
+    width: calc(50% - (2 * 35px) / 3);
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .photographer_section .card_profile {
+    width: calc(60% - (2 * 35px) / 3);
+  }
+}
+
+.photographer_section .card_profile a {
+  text-align: center;
   text-decoration: none;
 }
 
-.photographer_section article h2 {
-  color: #d3573c;
-  font-size: 36px;
-  margin: 0;
-}
-
-.photographer_section article .localisation {
-  color: #901c1c;
-  font-size: 13px;
-  margin: 0;
-}
-
-.photographer_section article .accroche {
-  color: #000000;
-  font-size: 10px;
-  margin: 0;
-}
-
-.photographer_section article .prix {
-  color: #757575;
-  font-size: 9px;
-  margin: 0;
-}
-
-.photographer_section article img {
+.photographer_section .containerPicture {
   height: 200px;
   width: 200px;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.photographer_section .card_profile .card_picture {
+  height: 270px;
+  width: 270px;
+  position: relative;
+  right: 38px;
+  top: -30px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 325px) {
+  .photographer_section .card_profile .card_picture {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+.photographer_section .card_profile .card_name {
+  color: var(--text-color-primary);
+  font-size: 36px;
+  text-align: center;
+  margin: 15px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 325px) {
+  .photographer_section .card_profile .card_name {
+    font-size: 25px;
+  }
+}
+
+.cards_info {
+  text-align: center;
+  line-height: 8px;
+  margin-top: -12px;
+}
+
+@media screen and (max-width: 515px) {
+  .cards_info {
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .cards_info {
+    line-height: 25px;
+  }
+}
+
+.cards_info .cards_country {
+  color: var(--text-color-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cards_info .cards_tagline {
+  color: var(--text-color-tertiary);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.cards_info .cards_price {
+  color: var(--text-color-quaternary);
+  font-size: 9px;
 }
